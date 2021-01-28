@@ -6,14 +6,18 @@ import { createStackNavigator } from '@react-navigation/stack';
 const Stack = createStackNavigator();
 
 //Start Screens
-import {Home} from '../screens';
+import {Initial, Home, Questions, Final} from '../screens';
 //End Screens
+import { noHeader, Header } from '../components/header';
 
 export default function Route() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Initial" component={Initial} options={noHeader}/>
+        <Stack.Screen name="Home" component={Home} options={noHeader}/>
+        <Stack.Screen name="Questions" component={Questions} options={Header}/>
+        <Stack.Screen name="Final" component={Final} options={Header}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
