@@ -16,6 +16,11 @@ import {
   TextTwo,
   SubContainer
 } from './styles';
+
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import * as QuestionActions from '../questions/redux/actions';
+
 import personagemfalando from '../../assets/img/personagemfalando.png';
 import {IUsuario} from './typescript';
 
@@ -26,11 +31,13 @@ const Home = (Props) => {
   })
 
   const handleSave = () => {
+    const {QuestionDispatch} = Props;
     const {nome} = usuario;
     if(!nome || nome.length == 0){
       Alert.alert('Atenção!', 'Preencha o nome para continuar.');
     }else{
-      navigation.navigate('Questions');
+      QuestionDispatch.callSaveName(nome);
+      //navigation.navigate('Questions');
     }
   }
 
@@ -45,7 +52,7 @@ const Home = (Props) => {
           <TextTwo>
             <TextTitle>Olá usuário!</TextTitle>
             <TextMessage>
-              Antes de iniciarmos as perguntas, por gentileza, informe seu nome no campo abaixo.
+              Antes de iniciarmos as perguntas, por gentileza, informe o seu nome no campo abaixo.
             </TextMessage>
           </TextTwo>
         </TextContainer>
@@ -62,4 +69,8 @@ const Home = (Props) => {
   );
 };
 
-export default Home;
+const mapDispatchToProps = (dispatch) => ({
+  QuestionDispatch: bindActionCreators(QuestionActions, dispatch)
+});
+
+export default connect(null, mapDispatchToProps)(Home);
