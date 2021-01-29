@@ -1,18 +1,15 @@
 import * as types from './types';
-import {all, take, takeLatest, put} from 'redux-saga/effects';
+import {call, put} from 'redux-saga/effects';
+import * as RootNavigation from '../../../navigation/navigationActions';
 
 //Salva no reducer o nome informado. 
-function* saveNameReducer(action) {
+export function* saveNameReducer(action) {
   yield put({
     type: types.SAVE_NAME_SUCCESS,
     payload: action.payload
   });
 }
-
-function* QuestionMiddleware() {
-  return yield all([
-    yield takeLatest(types.SAVE_NAME, saveNameReducer)
-  ]);
+//Quando salva o nome com sucesso, navega até a tela de questões.
+export function* navigateQuestions(){
+  yield call(() => RootNavigation.navigate('Questions'))
 }
-
-export default QuestionMiddleware;

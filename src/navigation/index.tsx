@@ -13,10 +13,23 @@ import {Initial, Home, Questions, Final} from '../screens';
 //End Screens
 import {noHeader, Header} from '../components/header';
 
+import { navigationRef, isReadyRef } from './navigationActions';
+
 export default function Route() {
+  React.useEffect(() => {
+    return () => {
+      isReadyRef.current = false
+    };
+  }, []);
+
   return (
       <Provider store={Store}>
-    <NavigationContainer>
+    <NavigationContainer 
+      ref={navigationRef}
+      onReady={() => {
+        isReadyRef.current = true;
+      }}
+      >
         <Stack.Navigator>
           <Stack.Screen name="Initial" component={Initial} options={noHeader} />
           <Stack.Screen name="Home" component={Home} options={noHeader} />
