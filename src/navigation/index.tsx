@@ -8,9 +8,7 @@ import Store from '../redux/store';
 
 const Stack = createStackNavigator();
 
-//Start Screens
 import {Initial, Home, Questions, Final} from '../screens';
-//End Screens
 import {noHeader, Header} from '../components/header';
 
 import { navigationRef, isReadyRef } from './navigationActions';

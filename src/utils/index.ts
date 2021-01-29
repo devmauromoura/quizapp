@@ -11,5 +11,4 @@ export const colors = {
     responseOptionText: "#906007",
     success: "#25A200",
     error: "#E60000"
-
 }

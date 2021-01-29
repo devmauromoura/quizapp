@@ -103,7 +103,7 @@ const Questions = (Props) => {
         </Body>
         <Footer>
           {questions[PosQuestion].alternatives.map((item) => (
-            <ResponseButton disabled={Block} correct={questions[PosQuestion].response} itemid={item.id} result={Result} onPress={() => handleSetResponse(item.id)}>
+            <ResponseButton key={item.id} disabled={Block} correct={questions[PosQuestion].response} itemid={item.id} result={Result} onPress={() => handleSetResponse(item.id)}>
               <ResponseButtonText correct={questions[PosQuestion].response} itemid={item.id} result={Result}>
                {item.alternative}
               </ResponseButtonText>
