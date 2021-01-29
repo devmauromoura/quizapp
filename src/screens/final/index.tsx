@@ -3,20 +3,28 @@ import React, {useEffect} from 'react';
 import {Body, Container, Header, Message, Name, Safe, Time, Points, Button, ButtonText} from './styles';
 import {BarChart} from 'react-native-chart-kit';
 import { colors } from '../../utils';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import * as QuestionsActions from '../questions/redux/actions';
 
 const Final = (Props) => {
-  const {navigation} = Props;
+  const {navigation, QuestionsReducers, QuestionsDispatch} = Props;
+  const {name, correct, incorrect} = QuestionsReducers;
 
   useEffect(() => {
     navigation.setOptions({title: 'Resultado Final'});
   }, []);
+
+  const handleFinish = () => {
+    QuestionsDispatch.callFinish();
+  }
 
   return (
     <Safe>
       <Container>
         <Header>
           <Message>
-            <Name>FULANO</Name>, veja aqui seus resultados.
+            <Name>{name.toUpperCase()}</Name>, veja aqui seus resultados.
           </Message>
         </Header>
         <Body>
@@ -25,7 +33,7 @@ const Final = (Props) => {
               labels: ['Acertos', 'Erros'],
               datasets: [
                 {
-                  data: [3, 1],
+                  data: [correct, incorrect],
                 },
               ],
             }}
@@ -48,10 +56,9 @@ const Final = (Props) => {
               borderRadius: 16,
             }}
           />
-          <Points>Acertou 0 e errou 0 de um total de 0 perguntas.</Points>
-          <Time>Quiz respondido em 00 minutos.</Time>
+          <Points>Acertou {correct} e errou {incorrect} de um total de {correct+incorrect} perguntas.</Points>
         </Body>
-        <Button>
+        <Button onPress={() => handleFinish()}>
             <ButtonText>Finalizar</ButtonText>
         </Button>
       </Container>
@@ -59,4 +66,14 @@ const Final = (Props) => {
   );
 };
 
-export default Final;
+const mapStateToProps = (state) => ({
+    QuestionsReducers: state.Question
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  QuestionsDispatch: bindActionCreators(QuestionsActions, dispatch),
+});
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Final);
+

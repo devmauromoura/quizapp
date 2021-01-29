@@ -13,3 +13,15 @@ export function* saveNameReducer(action) {
 export function* navigateQuestions(){
   yield call(() => RootNavigation.navigate('Questions'))
 }
+
+export function* saveResponseCorrect() {
+  yield put({type: types.SAVE_RESPONSE_CORRECT_SUCCESS});
+}
+
+export function* saveResponseIncorrect() {
+  yield put({type: types.SAVE_RESPONSE_INCORRECT_SUCCESS});
+}
+
+export function* navigateFinish(){
+  yield call(() => RootNavigation.navigate('Initial'))
+}

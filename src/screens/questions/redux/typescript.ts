@@ -1,4 +1,5 @@
 export interface IState {
-    response: Array<Object>;
     name: string;
+    correct: number;
+    incorrect: number;
 }

@@ -2,8 +2,9 @@ import { IState } from "./typescript";
 import * as types from './types';
 
 const initialState:IState = {
-  response: [],
-  name: ''
+  name: '',
+  correct: 0,
+  incorrect: 0
 };
 
 export const QuestionReducer = (state = initialState, action) => {
@@ -14,11 +15,20 @@ export const QuestionReducer = (state = initialState, action) => {
         name: action.payload
       };
       
-    case types.SAVE_RESPONSE:
+    case types.SAVE_RESPONSE_CORRECT_SUCCESS:
       return {
         ...state,
-        response: [...state.response, action.payload]
+        correct: state.correct + 1
       };
+
+    case types.SAVE_RESPONSE_INCORRECT_SUCCESS:
+      return {
+        ...state,
+        incorrect: state.incorrect + 1
+      };
+
+      case types.FINISH:
+      return initialState;
     default:
       return state;
   }

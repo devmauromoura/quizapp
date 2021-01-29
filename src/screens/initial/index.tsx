@@ -4,8 +4,8 @@ import {Button, ButtonText, Container, Logo, Safe, StatusB} from './styles';
 import logofull from '../../assets/img/logofull.png';
 import * as Animatable from 'react-native-animatable';
 
-const Initial = (Props) => {
-    const {navigation} = Props;
+const Initial = (props) => {
+    const {navigation} = props;
   return (
     <Safe>
       <StatusB backgroundColor={colors.background} />

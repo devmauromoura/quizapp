@@ -1,12 +1,12 @@
 import {Alert} from 'react-native';
 import React, {useState} from 'react';
 import {
-    Button,
-    ButtonText,
+  Button,
+  ButtonText,
   Container,
-    FormContainer,
-    FormInput,
-    FormLabel,
+  FormContainer,
+  FormInput,
+  FormLabel,
   Safe,
   TextContainer,
   TextImage,
@@ -14,55 +14,58 @@ import {
   TextOne,
   TextTitle,
   TextTwo,
-  SubContainer
+  SubContainer,
 } from './styles';
 
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
 import * as QuestionActions from '../questions/redux/actions';
 
 import personagemfalando from '../../assets/img/personagemfalando.png';
 import {IUsuario} from './typescript';
 
 const Home = (Props) => {
-  const {navigation} = Props;
   const [usuario, setUsuario] = useState<IUsuario>({
-    nome: null
-  })
+    nome: null,
+  });
 
   const handleSave = () => {
     const {QuestionDispatch} = Props;
     const {nome} = usuario;
-    if(!nome || nome.length == 0){
+    
+    if (!nome || nome.length == 0) {
       Alert.alert('Atenção!', 'Preencha o nome para continuar.');
-    }else{
+    } else {
       QuestionDispatch.callSaveName(nome);
-      //navigation.navigate('Questions');
     }
-  }
+  };
 
   return (
     <Safe>
       <Container>
         <SubContainer>
-        <TextContainer>
-          <TextOne>
-            <TextImage source={personagemfalando} resizeMode="contain" />
-          </TextOne>
-          <TextTwo>
-            <TextTitle>Olá usuário!</TextTitle>
-            <TextMessage>
-              Antes de iniciarmos as perguntas, por gentileza, informe o seu nome no campo abaixo.
-            </TextMessage>
-          </TextTwo>
-        </TextContainer>
-        <FormContainer>
+          <TextContainer>
+            <TextOne>
+              <TextImage source={personagemfalando} resizeMode="contain" />
+            </TextOne>
+            <TextTwo>
+              <TextTitle>Olá usuário!</TextTitle>
+              <TextMessage>
+                Antes de iniciarmos as perguntas, por gentileza, informe o seu
+                nome no campo abaixo.
+              </TextMessage>
+            </TextTwo>
+          </TextContainer>
+          <FormContainer>
             <FormLabel>Seu nome</FormLabel>
-            <FormInput value={usuario.nome} onChangeText={text => setUsuario({nome: text})}/>
-        </FormContainer>
+            <FormInput
+              value={usuario.nome}
+              onChangeText={(text) => setUsuario({nome: text})}
+            />
+          </FormContainer>
         </SubContainer>
         <Button onPress={() => handleSave()}>
-            <ButtonText>Salvar</ButtonText>
+          <ButtonText>Salvar</ButtonText>
         </Button>
       </Container>
     </Safe>
@@ -70,7 +73,7 @@ const Home = (Props) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  QuestionDispatch: bindActionCreators(QuestionActions, dispatch)
+  QuestionDispatch: bindActionCreators(QuestionActions, dispatch),
 });
 
 export default connect(null, mapDispatchToProps)(Home);
