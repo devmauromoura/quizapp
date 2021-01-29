@@ -2,4 +2,4 @@
 
 ⚠️ Projeto para estudo e prática. 
 
-<img src="https://i.imgur.com/6pZ9fDB.gif?raw=true" alt="Preview" width="200"/>
+<img src="https://i.imgur.com/bbTRc68.gif" alt="Preview" width="200"/>
